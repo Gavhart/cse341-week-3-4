@@ -1,29 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-dotenv.config(); // This should be at the very top
-
-// Debugging logs to verify environment variables
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
-console.log('GOOGLE_CLIENT_ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('GOOGLE_CLIENT_SECRET:', process.env.GOOGLE_CLIENT_SECRET);
-console.log('SESSION_SECRET:', process.env.SESSION_SECRET);
-
-const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');  // Ensure helmet is required
+const rateLimit = require('express-rate-limit');  // Ensure express-rate-limit is required
 const passport = require('passport');
 const session = require('express-session');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
-const userRoutes = require('./ItemUserManager/routes/users');
-const itemRoutes = require('./ItemUserManager/routes/items');
-const authRoutes = require('./ItemUserManager/routes/auth');
+const userRoutes = require('./routes/users');
+const itemRoutes = require('./routes/items');
+const authRoutes = require('./routes/auth');
+
+dotenv.config(); // This should be at the very top
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(helmet());
+app.use(helmet());  // Use helmet for security
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -40,7 +34,7 @@ app.use(session({
 }));
 
 // Passport
-require('./ItemUserManager/config/passport');
+require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -49,9 +43,9 @@ const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
-            title: 'My Project API',
+            title: 'ItemUserManager API',
             version: '1.0.0',
-            description: 'API documentation for My Project',
+            description: 'API documentation for ItemUserManager',
         },
         servers: [
             {
