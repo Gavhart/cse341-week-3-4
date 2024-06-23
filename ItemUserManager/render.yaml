@@ -1,0 +1,17 @@
+# render.yaml
+
+services:
+  - type: web
+    name: ItemUserManager
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://cse341:Week3-4@cse341.mvtlgq3.mongodb.net/
+      - key: GOOGLE_CLIENT_ID
+        value: 936805873622-u6krdm9i07qmd9nfu0uvmdbrv9ktl42t.apps.googleusercontent.com
+      - key: GOOGLE_CLIENT_SECRET
+        value: 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
+      - key: SESSION_SECRET
+        value: be187a5fab74acc58aafd9a78d2f4d40af5421a310d30bc06ec4d09609476707
