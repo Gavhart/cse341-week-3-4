@@ -11,14 +11,14 @@
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^5.0.0",
     "express-session": "^1.17.1",
-    "mongoose": "^5.12.3",
+    "helmet": "^5.0.0",
+    "mongoose": "^5.13.22",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "helmet": "^5.0.0",
-    "express-rate-limit": "^5.0.0"
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.3",
