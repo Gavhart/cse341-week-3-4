@@ -15,9 +15,9 @@ const passport = require('passport');
 const session = require('express-session');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
-const userRoutes = require('./routes/users');
-const itemRoutes = require('./routes/items');
-const authRoutes = require('./routes/auth');
+const userRoutes = require('./ItemUserManager/routes/users');
+const itemRoutes = require('./ItemUserManager/routes/items');
+const authRoutes = require('./ItemUserManager/routes/auth');
 
 const app = express();
 
@@ -40,7 +40,7 @@ app.use(session({
 }));
 
 // Passport
-require('./config/passport');
+require('./ItemUserManager/config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
