@@ -7,9 +7,9 @@ const passport = require('passport');
 const session = require('express-session');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
-const userRoutes = require('./my_project/routes/users');  
-const itemRoutes = require('./my_project/routes/items');  
-const authRoutes = require('./my_project/routes/auth');  
+const userRoutes = require('./routes/users');  
+const itemRoutes = require('./routes/items');  
+const authRoutes = require('./routes/auth');  
 
 dotenv.config();
 
@@ -34,7 +34,7 @@ app.use(session({
 }));
 
 // Passport
-require('./my_project/config/passport');
+require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
