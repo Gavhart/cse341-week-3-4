@@ -5,7 +5,7 @@ Content-Type: application/json
 ###
 
 ### Get a Single Contact
-GET http://localhost:3000/api/items/60d0fe4f5311236168a109ca HTTP/1.1
+GET http://localhost:3000/api/items/66776fd13f69c037b47cf04f HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -33,7 +33,7 @@ Content-Type: application/json
     "name": "Updated Item",
     "description": "This is an updated test item",
     "category": "Updated Category",
-    "price": 19.99,
+    "price": 20.99,
     "stock": 50,
     "rating": 4
 }
@@ -41,7 +41,7 @@ Content-Type: application/json
 ###
 
 ### Delete a Contact
-DELETE http://localhost:3000/api/items/60d0fe4f5311236168a109ca HTTP/1.1
+DELETE http://localhost:3000/api/items/66776e053f69c037b47cf03f HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -53,7 +53,7 @@ Content-Type: application/json
 ###
 
 ### Get a Single User
-GET http://localhost:3000/api/users/60d0fe4f5311236168a109cb HTTP/1.1
+GET http://localhost:3000/api/users/66776fce3f69c037b47cf04d HTTP/1.1
 Content-Type: application/json
 
 ###
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 {
     "googleId": "testgoogleid",
-    "displayName": "Test User",
+    "displayName": "Test User 1",
     "email": "testuser@example.com"
 }
 
@@ -76,13 +76,13 @@ Content-Type: application/json
 
 {
     "displayName": "Updated User",
-    "email": "updateduser@example.com"
+    "email": "updateduser1@example.com"
 }
 
 ###
 
 ### Delete a User
-DELETE http://localhost:3000/api/users/60d0fe4f5311236168a109cb HTTP/1.1
+DELETE http://localhost:3000/api/users/66776fce3f69c037b47cf04d HTTP/1.1
 Content-Type: application/json
 
 ###
