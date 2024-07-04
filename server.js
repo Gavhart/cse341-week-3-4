@@ -10,6 +10,8 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const userRoutes = require("./routes/users");
 const itemRoutes = require("./routes/items");
 const authRoutes = require("./routes/auth");
+const bcrypt = require("bcryptjs");
+const User = require('./models/user'); 
 
 dotenv.config();
 

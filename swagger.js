@@ -67,6 +67,54 @@
  *                 $ref: '#/components/schemas/Item'
  */
 
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 required: true
+ *               password:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ * /auth/login:
+ *   post:
+ *     summary: Login a user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 required: true
+ *               password:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       200:
+ *         description: Logged in successfully
+ * /auth/logout:
+ *   get:
+ *     summary: Logout a user
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
+
 // Get all items
 router.get('/', async (req, res) => {
     try {

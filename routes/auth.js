@@ -1,24 +1,33 @@
-const express = require('express');
-const passport = require('passport');
+// Auth Routes File (routes/auth.js)
+const express = require("express");
 const router = express.Router();
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
 
-// Auth with Google
-router.get('/google', passport.authenticate('google', {
-    scope: ['profile', 'email']
-}));
+// Login
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.json({ message: 'Logged in successfully' });
+});
 
-// Google auth callback
-router.get('/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req, res) => {
-        res.redirect('/dashboard');
-    }
-);
-
-// Logout user
+// Logout
 router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+  req.logout();
+  res.json({ message: 'Logged out successfully' });
+});
+
+// Register
+router.post('/register', async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = await User.create({
+      username: req.body.username,
+      password: hashedPassword
+    });
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const UserSchema = new mongoose.Schema({
     googleId: String,
     displayName: String,
@@ -8,4 +9,6 @@ const UserSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
-module.exports = mongoose.model('User', UserSchema);
+
+// Check if the model exists using mongoose.models to avoid recompilation error
+module.exports = mongoose.models.User || mongoose.model('User', UserSchema);
