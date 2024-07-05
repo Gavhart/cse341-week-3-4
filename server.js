@@ -5,13 +5,12 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
 const userRoutes = require("./routes/users");
 const itemRoutes = require("./routes/items");
 const authRoutes = require("./routes/auth");
-const bcrypt = require("bcryptjs");
-const User = require('./models/user'); 
 
 dotenv.config();
 
@@ -23,8 +22,8 @@ app.use(helmet());
 
 // Rate Limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -33,31 +32,32 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
   })
 );
 
-// Passport
+// Passport for OAuth 2.0
 require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Swagger
+// Swagger API Documentation
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
       title: "ItemUserManager API",
       version: "1.0.0",
-      description: "API documentation for ItemUserManager",
+      description: "API documentation for ItemUserManager"
     },
     servers: [
       {
-        url: "http://localhost:3000",
-      },
-    ],
+        url: "http://localhost:3000"
+      }
+    ]
   },
-  apis: ["./routes/*.js"],
+  apis: ["./routes/*.js"], // pointing to where your routes are documented
 };
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -67,7 +67,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/items", itemRoutes);
 app.use("/auth", authRoutes);
 
-// Connect to MongoDB
+// MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
