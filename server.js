@@ -59,7 +59,22 @@ const swaggerOptions = {
   },
   apis: ["./routes/*.js"], // pointing to where your routes are documented
 };
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+const swaggerDocs = swaggerJsDoc({
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "ItemUserManager API",
+      version: "1.0.0",
+      description: "API documentation for ItemUserManager",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  apis: ["./routes/*.js"], // Ensure your route files are located according to this pattern
+});
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Routes
